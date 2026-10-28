@@ -1,0 +1,14 @@
+<svg width="520" height="150" viewBox="0 0 520 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#4F46C8"/>
+      <stop offset="1" stop-color="#7C6BFF"/>
+    </linearGradient>
+  </defs>
+  <rect x="8" y="14" width="122" height="122" rx="36" fill="url(#g)"/>
+  <path d="M43 49h34c19 0 33 12 33 31 0 20-14 31-33 31H43V49Zm23 18v26h10c8 0 13-4 13-13 0-8-5-13-13-13H66Z" fill="white"/>
+  <path d="M53 43c-5-5-6-11-2-17 8 2 13 8 12 16-3-1-7-1-10 1Zm13 13c-3-12 3-21 15-25 7 9 5 19-3 25-4 3-8 3-12 0Z" fill="white" opacity=".92"/>
+  <path d="M64 69c-8 3-14 9-16 17 11 1 19-4 22-13" stroke="white" stroke-width="5" stroke-linecap="round"/>
+  <text x="155" y="79" fill="#20214F" font-family="Georgia,serif" font-size="54" font-weight="700" letter-spacing="-1.5">DASTOOR</text>
+  <text x="158" y="108" fill="#6B7280" font-family="Arial,sans-serif" font-size="12" font-weight="800" letter-spacing="5">RESTAURANT · GUJRANWALA</text>
+</svg>

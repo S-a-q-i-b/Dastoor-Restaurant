@@ -1,0 +1,375 @@
+@import "tailwindcss";
+
+
+
+:root {
+  --background: #ffffff;
+  --foreground: #17172f;
+
+  --indigo: #5146c8;
+  --indigo-dark: #28245f;
+  --indigo-hover: #4036af;
+  --indigo-soft: #eeecff;
+
+  --stone-soft: #f6f6f3;
+  --stone-border: #e7e5df;
+
+  --scroll: #5146c8;
+  --scroll-track: #f0eff8;
+
+  --page-gutter: 1.25rem;
+  --content-max-width: 80rem;
+
+  --ease-premium: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --transition-fast: 180ms ease;
+  --transition-premium: 300ms var(--ease-premium);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* ========================================
+   02. BASE RESET
+======================================== */
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    background: var(--background);
+    scroll-behavior: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--scroll) var(--scroll-track);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    min-height: 100vh;
+    min-height: 100svh;
+    margin: 0;
+
+    overflow-x: hidden;
+
+    background: var(--background);
+    color: var(--foreground);
+
+    font-family:
+      var(--font-geist-sans, Arial),
+      Helvetica,
+      sans-serif;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: var(--indigo);
+    color: #ffffff;
+  }
+
+  a,
+  button {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  a,
+  button,
+  input,
+  textarea,
+  select {
+    touch-action: manipulation;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+  }
+
+  img,
+  video,
+  iframe {
+    display: block;
+  }
+
+  img,
+  video {
+    max-width: 100%;
+  }
+
+  img {
+    height: auto;
+  }
+
+  button {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid var(--indigo);
+    outline-offset: 4px;
+  }
+
+  input,
+  textarea,
+  select {
+    max-width: 100%;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  :disabled {
+    opacity: 0.65;
+  }
+}
+
+/* ========================================
+   03. SHARED LAYOUT
+======================================== */
+
+@layer components {
+  .hero-shell {
+    min-height: calc(100vh - 78px);
+    min-height: calc(100svh - 78px);
+  }
+
+  .soft-grid {
+    background-image:
+      linear-gradient(
+        rgba(81, 70, 200, 0.045) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        90deg,
+        rgba(81, 70, 200, 0.045) 1px,
+        transparent 1px
+      );
+
+    background-size: 38px 38px;
+  }
+
+  .content-container {
+    width: 100%;
+    max-width: var(--content-max-width);
+    margin-inline: auto;
+  }
+}
+
+/* ========================================
+   04. PREMIUM BUTTONS
+   No glint. No shine sweep.
+======================================== */
+
+@layer components {
+  .dastoor-btn {
+    position: relative;
+
+    transition:
+      transform 250ms var(--ease-premium),
+      box-shadow 250ms ease,
+      background-color 250ms ease,
+      border-color 250ms ease,
+      color 250ms ease;
+
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /*
+    IMPORTANT:
+    Pseudo-elements are explicitly disabled
+    so old shine/glint effects cannot appear
+    on Dastoor buttons from this stylesheet.
+  */
+
+  .dastoor-btn::before,
+  .dastoor-btn::after {
+    content: none;
+    display: none;
+  }
+
+  .dastoor-btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .dastoor-btn:active {
+    transform: scale(0.985);
+    transition-duration: 100ms;
+  }
+
+  .dastoor-btn:disabled,
+  .dastoor-btn[aria-disabled="true"] {
+    transform: none;
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+}
+
+/* ========================================
+   05. NAVIGATION LINKS
+======================================== */
+
+@layer components {
+  .nav-link {
+    position: relative;
+    text-decoration: none;
+  }
+
+  .nav-link::after {
+    content: "";
+
+    position: absolute;
+    right: 0;
+    bottom: -8px;
+    left: 0;
+
+    height: 2px;
+
+    background: var(--indigo);
+
+    transform: scaleX(0);
+    transform-origin: left;
+
+    transition: transform 250ms var(--ease-premium);
+  }
+
+  .nav-link:hover::after,
+  .nav-link[aria-current="page"]::after {
+    transform: scaleX(1);
+  }
+}
+
+/* ========================================
+   06. ANIMATION PERFORMANCE
+======================================== */
+
+@layer components {
+  [data-reveal],
+  [data-gsap-card],
+  [data-gsap-float] {
+    will-change: transform, opacity;
+  }
+
+  [data-gsap-card] {
+    transform-origin: center;
+  }
+
+  [data-gsap-float] {
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+  }
+}
+
+/* ========================================
+   07. PREMIUM SCROLLBAR
+======================================== */
+
+/* Chrome, Edge, Safari */
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scroll-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scroll);
+  border: 2px solid var(--scroll-track);
+  border-radius: 999px;
+
+  transition: background-color 200ms ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--indigo-dark);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--scroll-track);
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+
+    transition-duration: 0.01ms !important;
+  }
+
+  [data-reveal],
+  [data-gsap-card],
+  [data-gsap-float] {
+    will-change: auto;
+  }
+
+  .dastoor-btn:hover,
+  .dastoor-btn:active {
+    transform: none;
+  }
+
+  .nav-link::after {
+    transition: none;
+  }
+}
+@keyframes cart-pop {
+  0% {
+    transform: scale(0.75);
+    opacity: 0.65;
+  }
+
+  70% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @keyframes cart-pop {
+    from,
+    to {
+      transform: none;
+      opacity: 1;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  footer svg {
+    scroll-behavior: auto;
+  }
+}
